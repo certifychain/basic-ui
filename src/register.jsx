@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { signup } from "./auth"
 
 function Register() {
     const [username, setUsername] = useState("")
@@ -7,19 +8,26 @@ function Register() {
     const [cpassword, setCpassword] = useState("")
     const [errorreg, setErrorreg] = useState("")
 
-    const register = () => {
-        if (cpassword !== password) {
-          setErrorreg('error: passwords do not match, try again')
+    const handleSignup = async () => {
+        try {
+          if (cpassword !== password) {
+            setErrorreg('error: passwords do not match, try again')
+            setPassword("")
+            setCpassword("")
+          } else if (password.length < 8) {
+            setErrorreg('error: password is too short')
+            setPassword("")
+            setCpassword("")
+          } else {
+            const response = await signup(username, password, email)
+            console.log(response)
+            alert('registered successfully')
+          }
+        } catch (error) {
+          console.log("error: " + error)
         }
-        else if(password.length < 8){
-          setErrorreg('error: password is too short')
-          setPassword("")
-          setCpassword("")
-        }
-        else {
-          alert('registered succesfully')
-        }
-    }
+      }
+      
 
     return (
     <div className='flex min-h-screen flex-col justify-center items-center'>
@@ -42,7 +50,7 @@ function Register() {
                     confirm password:
                     <input type="password" value={cpassword} onChange={(event) => setCpassword(event.target.value)} className="p-1"/>
                 </div>
-                <button onClick={register} className='rounded-xl text-center py-2 px-5 bg-red-300'>register</button>
+                <button onClick={handleSignup} className='rounded-xl text-center py-2 px-5 bg-red-300'>register</button>
             </div>
             <div className="my-5 text-center text-red-500">{errorreg}</div>
         </div>
