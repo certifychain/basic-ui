@@ -1,7 +1,18 @@
+import { useState } from "react"
+import { login } from "./auth"
 
 function Login() {
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
+
+    const handleLogin = async () => {
+      try {
+        const response = await login( username, password )
+        console.log(response)
+      } catch (error) {
+        console.log("error: " + error)
+      }
+    }
 
     return (
       <div className='flex min-h-screen flex-col justify-center items-center'>
@@ -16,7 +27,7 @@ function Login() {
                   password:
                   <input type="password" value={password} onChange={(event) => setPassword(event.target.value)} className="p-1"/>
               </div>
-              <button className='rounded-xl text-center py-2 px-5 bg-red-300'>login</button>
+              <button className='rounded-xl text-center py-2 px-5 bg-red-300' onClick={handleLogin}>login</button>
           </div>
         </div>
       </div>
