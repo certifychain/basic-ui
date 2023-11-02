@@ -2,6 +2,7 @@ import React from 'react'
 import { useState } from "react"
 import { login } from "./auth"
 import { useCookies } from 'react-cookie'
+import { Link } from 'react-router-dom'
 
 function Login() {
   const [username, setUsername] = useState("")
@@ -34,7 +35,7 @@ function Login() {
           </div>
           <button className='rounded-xl text-center py-2 px-5 bg-red-300' onClick={handleLogin}>login</button>
         </div>
-        <p>Don't you have an account ? <a href="register">Register here</a></p>
+        <p>Don't you have an account ? <Link to="../register">Register here</Link></p>
       </div>
     </div>
   )
