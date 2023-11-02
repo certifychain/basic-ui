@@ -1,6 +1,5 @@
 import React from 'react';
 import { useState } from "react"
-import { Link } from 'react-router-dom';
 import { signup } from "./auth"
 import { useCookies } from 'react-cookie'
 
@@ -29,7 +28,7 @@ function Register() {
         window.location.href = "./home"
       }
     } catch (error) {
-      console.log("error: " + error)
+      alert("error: " + error)
     }
   }
 
@@ -57,7 +56,7 @@ function Register() {
           </div>
           <button onClick={handleSignup} className='rounded-xl text-center py-2 px-5 bg-red-300'>register</button>
         </div>
-        <p>Already have an account? <Link to="./login">Login here</Link></p>
+        <p>Already have an account? <a href="Login">Login here</a></p>
         <div className="my-5 text-center text-red-500">{errorreg}</div>
       </div>
     </div>
