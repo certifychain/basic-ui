@@ -1,12 +1,12 @@
-import React from 'react';
-import { useCookies } from 'react-cookie';
-import { Navigate } from 'react-router-dom';
+import React from 'react'
+import { useCookies } from 'react-cookie'
+import { Navigate } from 'react-router-dom'
 
 function Home() {
     const [cookies, setCookies, removeCookies] = useCookies(['authToken'])
 
     const isUserLoggedIn = () => {
-        return !!cookies.authToken;
+        return !!cookies.authToken
     }
 
     const handleRemove = () => {
@@ -26,7 +26,7 @@ function Home() {
                     </div>
                 </div>
             ) : (
-                <Navigate to="/login" replace={true} />
+                    <Navigate to="/login" replace={true} />
                 )}
         </div>
     )

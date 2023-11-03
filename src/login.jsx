@@ -35,7 +35,7 @@ function Login() {
           </div>
           <button className='rounded-xl text-center py-2 px-5 bg-red-300' onClick={handleLogin}>login</button>
         </div>
-        <p>Don't you have an account ? <Link to="../register">Register here</Link></p>
+        <p>don't you have an account ? <Link to="../register">register here</Link></p>
       </div>
     </div>
   )

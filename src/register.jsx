@@ -2,7 +2,7 @@ import React from 'react';
 import { useState } from "react"
 import { signup } from "./auth"
 import { useCookies } from 'react-cookie'
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'
 
 function Register() {
   const [username, setUsername] = useState("")
@@ -57,7 +57,7 @@ function Register() {
           </div>
           <button onClick={handleSignup} className='rounded-xl text-center py-2 px-5 bg-red-300'>register</button>
         </div>
-        <p>Already have an account? <Link to="../login">Login here</Link></p>
+        <p>already have an account? <Link to="../login">login here</Link></p>
         <div className="my-5 text-center text-red-500">{errorreg}</div>
       </div>
     </div>
