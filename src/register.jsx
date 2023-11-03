@@ -2,7 +2,7 @@ import React from 'react';
 import { useState } from "react"
 import { signup } from "./auth"
 import { useCookies } from 'react-cookie'
-import { Link } from 'react-router-dom'
+import { Link, Navigate } from 'react-router-dom'
 
 function Register() {
   const [username, setUsername] = useState("")
@@ -11,6 +11,10 @@ function Register() {
   const [cpassword, setCpassword] = useState("")
   const [errorreg, setErrorreg] = useState("")
   const [cookies, setCookie] = useCookies(['authToken'])
+
+  const isUserLoggedIn = () => {
+    return !!cookies.authToken
+  }
 
   const handleSignup = async () => {
     try {
@@ -36,6 +40,7 @@ function Register() {
 
   return (
     <div className='flex min-h-screen flex-col justify-center items-center'>
+    {!isUserLoggedIn() ? (
       <div className="min-w-[400px] bg-blue-300 p-5">
         <p className='text-5xl m-5'>register page</p>
         <div className='flex flex-col gap-5'>
@@ -59,7 +64,9 @@ function Register() {
         </div>
         <p>already have an account? <Link to="../login">login here</Link></p>
         <div className="my-5 text-center text-red-500">{errorreg}</div>
-      </div>
+      </div>) :(
+                    <Navigate to="/home" replace={true} />
+              )}
     </div>
   )
 }
