@@ -1,8 +1,8 @@
 import React from 'react';
 import { useState } from "react"
-import { Link } from 'react-router-dom';
 import { signup } from "./auth"
 import { useCookies } from 'react-cookie'
+import { Link, Navigate } from 'react-router-dom'
 
 function Register() {
   const [username, setUsername] = useState("")
@@ -11,6 +11,10 @@ function Register() {
   const [cpassword, setCpassword] = useState("")
   const [errorreg, setErrorreg] = useState("")
   const [cookies, setCookie] = useCookies(['authToken'])
+
+  const isUserLoggedIn = () => {
+    return !!cookies.authToken
+  }
 
   const handleSignup = async () => {
     try {
@@ -29,13 +33,14 @@ function Register() {
         window.location.href = "./home"
       }
     } catch (error) {
-      console.log("error: " + error)
+      alert("error: " + error)
     }
   }
 
 
   return (
     <div className='flex min-h-screen flex-col justify-center items-center'>
+    {!isUserLoggedIn() ? (
       <div className="min-w-[400px] bg-blue-300 p-5">
         <p className='text-5xl m-5'>register page</p>
         <div className='flex flex-col gap-5'>
@@ -57,9 +62,11 @@ function Register() {
           </div>
           <button onClick={handleSignup} className='rounded-xl text-center py-2 px-5 bg-red-300'>register</button>
         </div>
-        <p>Already have an account? <Link to="./login">Login here</Link></p>
+        <p>already have an account? <Link to="../login">login here</Link></p>
         <div className="my-5 text-center text-red-500">{errorreg}</div>
-      </div>
+      </div>) :(
+                    <Navigate to="/home" replace={true} />
+              )}
     </div>
   )
 }
